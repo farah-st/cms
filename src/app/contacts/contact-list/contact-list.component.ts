@@ -16,7 +16,7 @@ export class ContactListComponent {
       'R. Kent Jackson',
       'jacksonk@byui.edu',
       '208-496-3771',
-      '../../../assets/jacksonk.jpg',
+      'assets/images/jacksonk.jpg',
       []
     ),
     new Contact(
@@ -24,9 +24,10 @@ export class ContactListComponent {
       'Rex Barzee',
       'barzeer@byui.edu',
       '208-496-3768',
-      '../../../assets/barzeer.jpg',
+      'assets/images/barzeer.jpg',
       []
     )
   ];
 }
+
 

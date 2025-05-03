@@ -1,0 +1,20 @@
+.contact-item {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .contact-img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-left: 15px;
+  }
+  
+  .contact-text {
+    flex: 1;
+  }
+
+  h3{
+    font-weight: bold;
+    font-size: 25px;
+  }
+  

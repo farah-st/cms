@@ -15,8 +15,7 @@ export class ContactDetailComponent {
     'R. Kent Jackson',
     'jacksonk@byui.edu',
     '208-496-3771',
-    'assets/jacksonk.jpg',
+    'assets/images/jacksonk.jpg',
     []
   );
 }
-

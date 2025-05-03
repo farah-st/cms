@@ -5,18 +5,18 @@
     </div>
     <div class="panel-body">
       <div class="list-group">
-        <a *ngFor="let contact of contacts" href="#" class="list-group-item clearfix">
-          <img
-            [src]="contact.imageUrl"
-            class="pull-right"
-            style="max-height: 40px; max-width: 40px;"
-            alt="{{ contact.name }}"
-          />
-          <div>
-            <h4>{{ contact.name }}</h4>
-            <p>{{ contact.email }}<br>{{ contact.phone }}</p>
+        <a *ngFor="let contact of contacts" href="#" class="list-group-item">
+          <div class="contact-item">
+            <div class="contact-text">
+              <h4>{{ contact.name }}</h4>
+            </div>
+            <img
+              [src]="contact.imageUrl"
+              class="contact-img"
+              alt="{{ contact.name }}"
+            />
           </div>
-        </a>
+        </a>        
       </div>
     </div>
   </div>
