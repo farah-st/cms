@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ContactsComponent } from './contacts/contacts/contacts.component';
+import { HeaderComponent } from './header.component';
 
 @Component({
-  selector: 'cms-root',
-  imports: [RouterOutlet],
+  selector: 'app-root',
+  standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  imports: [HeaderComponent, ContactsComponent]
 })
-export class AppComponent {
-  title = 'cms';
-}
+export class AppComponent {}
