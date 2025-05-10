@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'cms-document-detail',
-  imports: [],
+  standalone: true,
   templateUrl: './document-detail.component.html',
-  styleUrl: './document-detail.component.css'
+  styleUrls: ['./document-detail.component.css'] 
 })
+
 export class DocumentDetailComponent {
 
 }
+
