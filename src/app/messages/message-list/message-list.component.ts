@@ -13,9 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class MessageListComponent {
   messages: Message[] = [
-    new Message('1', 'Hello', 'Hi there!', 'Alice'),
-    new Message('2', 'Update', 'Project is done.', 'Bob'),
-    new Message('3', 'FYI', 'Meeting postponed.', 'Charlie')
+    new Message('1', 'Hello', 'MessageText', 'SenderName')
   ];
 
   onAddMessage(message: Message) {

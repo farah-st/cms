@@ -1,16 +1,10 @@
-.messageHeader {
-    background-color: azure;
-    border: solid thin black;
-    border-radius: 10px;
-    padding: 0.4rem;
-    font-size: 1.5rem;
-  }
-  
-  .messageText {
-    border-radius: 10px;
-    padding: 5px;
-    margin-top: .25rem;
-    margin-left: 1rem;
-    font-size: 1.5rem;
-  }
+.badge {
+  background-color: #e7f3f9;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 5px 10px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
   

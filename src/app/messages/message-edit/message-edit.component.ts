@@ -13,7 +13,7 @@ export class MessageEditComponent {
 
   @Output() addMessageEvent = new EventEmitter<Message>();
 
-  currentSender: string = 'Farah Pérez';
+  currentSender: string = 'Farah Stumpf';
 
   onSendMessage() {
     const subject = this.subjectInputRef.nativeElement.value;
