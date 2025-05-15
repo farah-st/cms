@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { ContactsComponent } from './contacts/contacts/contacts.component';
 import { DocumentsComponent } from './documents/documents/documents.component';
-import { MessageListComponent } from './messages/message-list/message-list.component';
-
+import { MessagesComponent } from './messages/messages/messages.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -15,7 +14,7 @@ import { MessageListComponent } from './messages/message-list/message-list.compo
     HeaderComponent,
     ContactsComponent,
     DocumentsComponent,
-    MessageListComponent
+    MessagesComponent 
   ]
 })
 export class AppComponent {

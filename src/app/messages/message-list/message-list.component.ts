@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Message } from '../message.model';
 import { MessageItemComponent } from '../message-item/message-item.component';
 import { MessageEditComponent } from '../message-edit/message-edit.component';
@@ -11,13 +11,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './message-list.component.html',
   styleUrls: ['./message-list.component.css']
 })
-export class MessageListComponent {
-  messages: Message[] = [
-    new Message('1', 'Hello', 'MessageText', 'SenderName')
-  ];
 
-  onAddMessage(message: Message) {
-    this.messages.push(message);
+export class MessageListComponent {
+  @Input() messages: Message[] = [];
+  
+  onAddMessage(newMessage: Message) {
+    this.messages.push(newMessage);
   }
 }
 
