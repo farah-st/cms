@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
+import { Document } from '../document.model';
 import { DocumentListComponent } from '../document-list/document-list.component'; // ✅ Adjust path if needed
 import { DocumentDetailComponent } from '../document-detail/document-detail.component'; // ✅ Adjust path if needed
 
@@ -15,7 +16,10 @@ import { DocumentDetailComponent } from '../document-detail/document-detail.comp
   styleUrls: ['./documents.component.css'] 
 })
 export class DocumentsComponent {
+  selectedDocument!: Document;
 
-  
+  onDocumentSelected(document: Document) {
+    this.selectedDocument = document;
+  }
 }
 
