@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Contact } from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
   contacts: Contact[] = [];
+  contactSelected = new Subject<Contact>();
 
   constructor() {
     this.contacts = MOCKCONTACTS;
@@ -17,12 +19,8 @@ export class ContactService {
   }
 
   getContact(id: string): Contact | null {
-    for (let contact of this.contacts) {
-      if (contact.id === id) {
-        return contact;
-      }
-    }
-    return null;
+    return this.contacts.find(contact => contact.id === id) || null;
   }
 }
+
 
