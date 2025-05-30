@@ -4,10 +4,10 @@ import { MessageListComponent } from './messages/message-list/message-list.compo
 import { ContactsComponent } from './contacts/contacts/contacts.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/documents', pathMatch: 'full' },
   { path: 'documents', component: DocumentsComponent },
   { path: 'messages', component: MessageListComponent },
   { path: 'contacts', component: ContactsComponent },
+  { path: '', redirectTo: '/documents', pathMatch: 'full' }
 ];
 
 

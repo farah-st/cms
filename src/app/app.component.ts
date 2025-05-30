@@ -9,6 +9,9 @@ import { HeaderComponent } from './header.component';
   styleUrls: ['./app.component.css'],
   imports: [RouterModule, HeaderComponent]
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'WeLearn CMS!';
+}
+
 
 
