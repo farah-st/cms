@@ -1,24 +1,27 @@
 <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">WeLearn CMS</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="#" (click)="onSelected('documents')">Documents</a>
-        <li><a href="#" (click)="onSelected('messages')">Messages</a>
-        <li><a href="#" (click)="onSelected('contacts')">Contacts</a>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-    <li class="dropdown" appDropdown>
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <li><a href="#">Login</a></li>
-        <li><a href="#">Other</a></li>
-        <li role="separator" class="divider"></li>
-        <li><a href="#">Logout</a></li>
-      </ul>
-    </li>
-  </ul>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/">WeLearn CMS</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a routerLink="/documents" routerLinkActive="active">Documents</a></li>
+      <li><a routerLink="/messages" routerLinkActive="active">Messages</a></li>
+      <li><a routerLink="/contacts" routerLinkActive="active">Contacts</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown" appDropdown>
+        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+          User <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Other</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </nav>
+
   
