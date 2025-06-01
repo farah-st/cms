@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Contact } from '../contact.model';
 import { ContactItemComponent } from '../contact-item/contact-item.component';
 import { ContactService } from '../contact.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'cms-contact-list',
   standalone: true,
-  imports: [CommonModule, ContactItemComponent],
+  imports: [CommonModule, ContactItemComponent, RouterModule],
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.css']
 })
@@ -16,11 +17,11 @@ export class ContactListComponent implements OnInit {
 
   constructor(private contactService: ContactService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.contacts = this.contactService.getContacts();
-  }
 
-  onSelected(contact: Contact) {
-    this.contactService.contactSelectedEvent.emit(contact); 
+    this.contactService.contactChangedEvent.subscribe((contacts: Contact[]) => {
+      this.contacts = contacts;
+    });
   }
 }

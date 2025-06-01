@@ -1,17 +1,17 @@
 <div class="panel panel-default">
   <div class="panel-heading custom-panel-heading">
     <div class="left-side">
-      <h1 class="panel-title">{{ contact.name }}</h1>
-      <img [src]="contact.imageUrl" alt="{{ contact.name }}" class="contact-img" />
+      <h1 class="panel-title">{{ contact?.name }}</h1>
+      <img [src]="contact?.imageUrl" alt="{{ contact?.name }}" class="contact-img" />
     </div>
     <div class="btn-group">
-      <a href="#" class="btn btn-primary btn-sm">Edit</a>
-      <a href="#" class="btn btn-danger btn-sm">Delete</a>
+      <a [routerLink]="['../', contact?.id, 'edit']" class="btn btn-primary btn-sm"> Edit </a>
+      <a (click)="onDelete()" class="btn btn-danger btn-sm">Delete</a>
     </div>
   </div>
   <div class="panel-body">
-    <p><strong>Email:</strong> {{ contact.email }}</p>
-    <p><strong>Phone:</strong> {{ contact.phone }}</p>
+    <p><strong>Email:</strong> {{ contact?.email }}</p>
+    <p><strong>Phone:</strong> {{ contact?.phone }}</p>
   </div>
 </div>
 
