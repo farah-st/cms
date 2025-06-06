@@ -1,13 +1,14 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Document } from './document.model';
 import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
+import { Subject } from 'rxjs'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DocumentService {
   private documents: Document[] = [];
-  documentListChangedEvent = new EventEmitter<Document[]>(); // <- Add this
+  documentListChangedEvent = new Subject<Document[]>(); 
 
   constructor() {
     this.documents = MOCKDOCUMENTS;
@@ -25,7 +26,7 @@ export class DocumentService {
     const index = this.documents.findIndex(doc => doc.id === id);
     if (index > -1) {
       this.documents.splice(index, 1);
-      this.documentListChangedEvent.emit(this.getDocuments()); // <- Notify changes
+      this.documentListChangedEvent.next(this.getDocuments()); // ✅ notify via Subject
     }
   }
 }
