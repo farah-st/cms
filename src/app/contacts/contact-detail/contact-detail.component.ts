@@ -34,5 +34,10 @@ export class ContactDetailComponent {
   }
 }
 
+onCancel(): void {
+  this.router.navigate(['/contacts']);
+}
+
+
 }
 

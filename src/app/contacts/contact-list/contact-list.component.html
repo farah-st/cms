@@ -1,13 +1,13 @@
 <div class="panel panel-default">
   <div class="panel-heading clearfix">
     <h3 class="panel-title pull-left">Contacts</h3>
-    <a class="btn btn-success pull-right disabled">New Contact</a>
+    <button class="btn btn-success pull-right" routerLink="/contacts/new">New Contact</button>
   </div>
   <div class="panel-body">
     <div class="list-group">
       <app-contact-item
-      *ngFor="let contact of contacts"
-      [contact]="contact"
+        *ngFor="let contact of contacts"
+        [contact]="contact"
     ></app-contact-item>
     </div>
   </div>

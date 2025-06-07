@@ -5,7 +5,7 @@
       <img [src]="contact?.imageUrl" alt="{{ contact?.name }}" class="contact-img" />
     </div>
     <div class="btn-group">
-      <a [routerLink]="['../', contact?.id, 'edit']" class="btn btn-primary btn-sm"> Edit </a>
+      <a [routerLink]="['/contacts', contact?.id, 'edit']" class="btn btn-primary">Edit</a>
       <a (click)="onDelete()" class="btn btn-danger btn-sm">Delete</a>
     </div>
   </div>
