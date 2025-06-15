@@ -13,3 +13,117 @@
   overflow: hidden;
   background-color: #e5e5e5;
 }
+form {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+form div {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+form button[type="submit"] {
+  background-color: #2367b1;
+  color: white;
+}
+
+form button[type="button"] {
+  background-color: #6c757d;
+  color: white;
+}
+
+.required.ng-invalid {
+  border: 1px solid red;
+}
+
+.invalid.ng-invalid.ng-dirty {
+  border: 1px solid red;
+}
+
+.pad-left-right{
+  padding-left:.1rem;
+}
+
+.deleteButton {
+  margin-top: 1.5rem;
+  margin-left: -1.2rem;
+  width: 3.4rem;
+}
+
+.buttonDiv {
+  margin-top: 1.5rem;
+}
+
+.groupDiv {
+  min-height: 6rem;
+  border: solid thin lightgrey;
+}
+
+.dragMsg {
+  font-size: 2rem;
+  color: darkgrey;
+  margin-left: 3rem;
+}
+
+/* Make drag area usable */
+[cdkDropList] {
+  border: 2px dashed #ccc;
+  min-height: 50px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+[cdkDrag] {
+  cursor: move;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Required for CDK Drag-and-Drop */
+.cdk-drop-list {
+  display: block;
+  min-height: 50px;
+  border: 2px dashed #ccc;
+  background-color: #f9f9f9;
+  padding: 10px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border: solid 1px #ccc;
+  background-color: white;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+  background: #ddd;
+  border: dotted 2px #999;
+}

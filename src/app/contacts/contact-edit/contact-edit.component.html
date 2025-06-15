@@ -1,21 +1,120 @@
-<form (ngSubmit)="onSubmit()" #f="ngForm">
-  <div>
-    <label for="name">Name</label>
-    <input type="text" id="name" required [(ngModel)]="editedContact.name" name="name">
-  </div>
-  <div>
-    <label for="email">Email</label>
-    <input type="email" id="email" [(ngModel)]="editedContact.email" name="email">
-  </div>
-  <div>
-    <label for="phone">Phone</label>
-    <input type="tel" id="phone" [(ngModel)]="editedContact.phone" name="phone">
-  </div>
-  <div>
-    <label for="imageUrl">Image URL</label>
-    <input type="text" id="imageUrl" [(ngModel)]="editedContact.imageUrl" name="imageUrl">
-  </div>
-  <button type="submit">Save</button>
-  <button type="button" (click)="onCancel()">Cancel</button>
-</form>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            autocomplete="name"
+            class="form-control"
+            size="120"
+            maxlength="120"
+            [(ngModel)]="editedContact.name"
+            #name="ngModel">
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            autocomplete="email"
+            class="form-control"
+            size="120"
+            maxlength="255"
+            [(ngModel)]="editedContact.email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+            #email="ngModel">
+          <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
+            You must enter a valid email.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="phone">Phone:</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            autocomplete="tel"
+            class="form-control"
+            size="150"
+            maxlength="255"
+            [(ngModel)]="editedContact.phone"
+            pattern="\D*([2-9]\d{2})(\D*)([2-9]\d{2})(\D*)(\d{4})\D*"
+            #phone="ngModel">
+          <div *ngIf="phone.invalid && phone.touched" class="alert alert-danger">
+            Enter a valid phone number.
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="imageUrl">Image URL:</label>
+          <input
+            type="text"
+            id="imageUrl"
+            name="imageUrl"
+            autocomplete="url"
+            class="form-control"
+            size="150"
+            maxlength="255"
+            [(ngModel)]="editedContact.imageUrl">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="groupList">Group Contacts:</label>
+          <div
+            cdkDropList
+            id="groupList"
+            class="row"
+            style="min-height: 3rem;"
+            [cdkDropListData]="groupContacts"
+            (cdkDropListDropped)="onDrop($event)">
+
+            <div *ngFor="let contact of groupContacts; let i = index">
+              <div cdkDrag>
+                <div class="row">
+                  <div class="col-sm-11">
+                    <app-contact-item [contact]="contact"></app-contact-item>
+                  </div>
+                  <div class="col-sm-1">
+                    <button class="btn btn-danger deleteButton" type="button" (click)="onRemoveItem(i)">X</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <span class="dragMsg" *ngIf="groupContacts.length < 1">
+              Drag contacts in group here
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="(!name.valid || !email.valid) && (name.touched || email.touched)" class="alert alert-danger">
+        The Name and Email fields are required.
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 btn-toolbar">
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid">Save</button>
+          <button class="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
