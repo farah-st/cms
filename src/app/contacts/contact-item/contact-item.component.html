@@ -1,8 +1,12 @@
-<a [routerLink]="[contact.id]" routerLinkActive="active" class="list-group-item">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{ contact.name }}</h3>
-      <img [src]="contact.imageUrl" alt="{{ contact.name }}" />
-    </div>
+<!-- contact-item.component.html -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{ contact.name }}</h3>
+    <img [src]="contact.imageUrl" alt="{{ contact.name }}" />
   </div>
-</a>
+  <div class="panel-body">
+    <a [routerLink]="[contact.id]" routerLinkActive="active" class="btn btn-link">
+      View Contact
+    </a>
+  </div>
+</div>

@@ -1,5 +1,24 @@
-.panel-heading .btn {
-  margin-top: -5px; 
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Ensures responsive layout on small screens */
+}
+
+.panel-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0;
+}
+
+.panel-heading .right-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.panel-heading .input-group {
+  max-width: 200px;
 }
 
   

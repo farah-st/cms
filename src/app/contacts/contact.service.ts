@@ -1,35 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Contact } from './contact.model';
-import { MOCKCONTACTS } from './MOCKCONTACTS';
-import { Subject } from 'rxjs'; 
+import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-  contacts: Contact[] = [];
-  contactSelectedEvent = new Subject<Contact>(); 
-  contactChangedEvent = new Subject<Contact[]>(); 
-  maxContactId: number = 0;
+  contactChangedEvent = new Subject<Contact[]>();
+  private contacts: Contact[] = [];
+  private maxContactId: number = 0;
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
-    this.maxContactId = this.getMaxId();
-  }
+  constructor(private http: HttpClient) {}
 
   getContacts(): Contact[] {
-    return this.contacts.slice(); 
+    this.http.get<Contact[]>('https://cms-project-2025-default-rtdb.firebaseio.com/contacts.json')
+      .subscribe({
+        next: (contacts: Contact[]) => {
+          this.contacts = contacts;
+          this.maxContactId = this.getMaxId();
+          this.contacts.sort((a, b) => a.name.localeCompare(b.name));
+          this.contactChangedEvent.next(this.contacts.slice());
+        },
+        error: (error: any) => {
+          console.error('Error fetching contacts:', error);
+        }
+      });
+
+    return this.contacts;
   }
 
-  getContact(id: string): Contact | null {
-    return this.contacts.find(contact => contact.id === id) || null;
+  getContact(id: string): Contact | undefined {
+    return this.contacts.find(contact => contact.id === id);
   }
 
-  getMaxId(): number {
+  private getMaxId(): number {
     let maxId = 0;
-    for (let contact of this.contacts) {
+    for (const contact of this.contacts) {
       const currentId = parseInt(contact.id, 10);
-      if (currentId > maxId) {
+      if (!isNaN(currentId) && currentId > maxId) {
         maxId = currentId;
       }
     }
@@ -42,7 +51,8 @@ export class ContactService {
     this.maxContactId++;
     newContact.id = this.maxContactId.toString();
     this.contacts.push(newContact);
-    this.contactChangedEvent.next(this.contacts.slice());
+
+    this.storeContacts();
   }
 
   updateContact(originalContact: Contact, newContact: Contact): void {
@@ -53,7 +63,8 @@ export class ContactService {
 
     newContact.id = originalContact.id;
     this.contacts[pos] = newContact;
-    this.contactChangedEvent.next(this.contacts.slice());
+
+    this.storeContacts();
   }
 
   deleteContact(contact: Contact): void {
@@ -63,6 +74,20 @@ export class ContactService {
     if (pos < 0) return;
 
     this.contacts.splice(pos, 1);
-    this.contactChangedEvent.next(this.contacts.slice()); 
+    this.storeContacts();
+  }
+
+  storeContacts(): void {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http.put(
+      'https://cms-project-2025-default-rtdb.firebaseio.com/contacts.json',
+      JSON.stringify(this.contacts),
+      { headers }
+    ).subscribe({
+      next: () => {
+        this.contactChangedEvent.next(this.contacts.slice());
+      }
+    });
   }
 }

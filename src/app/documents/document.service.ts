@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Document } from './document.model';
-import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
-import { Subject } from 'rxjs'; 
+import { Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +9,23 @@ import { Subject } from 'rxjs';
 export class DocumentService {
   private documents: Document[] = [];
   documentListChangedEvent = new Subject<Document[]>();
-  private maxDocumentId: number; // <-- New
+  private maxDocumentId: number = 0;
 
-  constructor() {
-    this.documents = MOCKDOCUMENTS;
-    this.maxDocumentId = this.getMaxId(); // <-- Initialize
-  }
+  constructor(private http: HttpClient) { }
 
-  getDocuments(): Document[] {
-    return this.documents.slice();
+  getDocuments() {
+    this.http.get<Document[]>('https://cms-project-2025-default-rtdb.firebaseio.com/documents.json')
+      .subscribe({
+        next: (documents: Document[]) => {
+          this.documents = documents;
+          this.maxDocumentId = this.getMaxId();
+          this.documents.sort((a, b) => a.name.localeCompare(b.name));
+          this.documentListChangedEvent.next(this.documents.slice());
+        },
+        error: (error: any) => {
+          console.error('Error fetching documents:', error);
+        }
+      });
   }
 
   getDocument(id: string): Document | undefined {
@@ -28,7 +36,7 @@ export class DocumentService {
     let maxId = 0;
     for (let document of this.documents) {
       const currentId = parseInt(document.id, 10);
-      if (currentId > maxId) {
+      if (!isNaN(currentId) && currentId > maxId) {
         maxId = currentId;
       }
     }
@@ -42,8 +50,7 @@ export class DocumentService {
     newDocument.id = this.maxDocumentId.toString();
     this.documents.push(newDocument);
 
-    const documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocuments();
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
@@ -55,8 +62,7 @@ export class DocumentService {
     newDocument.id = originalDocument.id;
     this.documents[pos] = newDocument;
 
-    const documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocuments();
   }
 
   deleteDocument(document: Document): void {
@@ -66,8 +72,21 @@ export class DocumentService {
     if (pos < 0) return;
 
     this.documents.splice(pos, 1);
-    const documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocuments();
+  }
+
+  storeDocuments() {
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http.put(
+      'https://cms-project-2025-default-rtdb.firebaseio.com/documents.json',
+      JSON.stringify(this.documents),
+      { headers }
+    ).subscribe({
+      next: () => {
+        this.documentListChangedEvent.next(this.documents.slice());
+      }
+    });
   }
 }
 

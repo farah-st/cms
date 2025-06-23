@@ -1,3 +1,4 @@
+<!-- contact-edit.component.html -->
 <div class="panel panel-default">
   <div class="panel-body">
     <form #f="ngForm" (ngSubmit)="onSubmit(f)">
@@ -85,15 +86,13 @@
             [cdkDropListData]="groupContacts"
             (cdkDropListDropped)="onDrop($event)">
 
-            <div *ngFor="let contact of groupContacts; let i = index">
-              <div cdkDrag>
-                <div class="row">
-                  <div class="col-sm-11">
-                    <app-contact-item [contact]="contact"></app-contact-item>
-                  </div>
-                  <div class="col-sm-1">
-                    <button class="btn btn-danger deleteButton" type="button" (click)="onRemoveItem(i)">X</button>
-                  </div>
+            <div *ngFor="let contact of groupContacts; let i = index" cdkDrag style="margin-bottom: 1rem;">
+              <div class="row">
+                <div class="col-sm-11">
+                  <app-contact-item [contact]="contact"></app-contact-item>
+                </div>
+                <div class="col-sm-1">
+                  <button class="btn btn-danger deleteButton" type="button" (click)="onRemoveItem(i)">X</button>
                 </div>
               </div>
             </div>

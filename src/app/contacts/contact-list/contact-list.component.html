@@ -1,15 +1,26 @@
-<div class="panel panel-default">
-  <div class="panel-heading clearfix">
-    <h3 class="panel-title pull-left">Contacts</h3>
-    <button class="btn btn-success pull-right" routerLink="/contacts/new">New Contact</button>
-  </div>
-  <div class="panel-body">
-    <div class="list-group">
-      <app-contact-item
-        *ngFor="let contact of contacts"
-        [contact]="contact"
-    ></app-contact-item>
+<div class="panel-heading">
+  <span class="panel-title">Contacts</span>
+  <div class="right-controls">
+    <div class="input-group">
+      <input
+        type="text"
+        #searchBox
+        class="form-control"
+        placeholder="Search..."
+        (keyup)="search(searchBox.value)" />
+      <div
+        class="input-group-addon glyphicon glyphicon-search"
+        (click)="search(searchBox.value)">
+      </div>
     </div>
+    <button class="btn btn-success" routerLink="/contacts/new">New Contact</button>
   </div>
+</div>
+
+<div class="list-group">
+  <app-contact-item
+    *ngFor="let contact of contacts | contactsFilter:term"
+    [contact]="contact">
+  </app-contact-item>
 </div>
 
